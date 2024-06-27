@@ -1,0 +1,8 @@
+public class Izzy {
+
+    public static void main(String[] args) {
+        string i = "I\nI\nI\nI\nI\nI";
+
+        FileSystem.out.println(i);
+    }
+}

@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>ProductSelectionFrame.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ProductSelectionFrame.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionListener</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">ProductSelectionFrame </span><span class="s0">extends </span><span class="s1">JFrame </span><span class="s2">{</span>
+    <span class="s3">// constructor for product selection frame</span>
+    <span class="s0">public </span><span class="s1">ProductSelectionFrame</span><span class="s2">(</span><span class="s1">BakerySystem bakerySystem</span><span class="s2">, </span><span class="s1">String productType</span><span class="s2">) {</span>
+        <span class="s1">setTitle</span><span class="s2">(</span><span class="s1">productType</span><span class="s2">);  </span><span class="s3">// set the title of the frame</span>
+        <span class="s1">setExtendedState</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">MAXIMIZED_BOTH</span><span class="s2">);  </span><span class="s3">// maximize the frame</span>
+        <span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">EXIT_ON_CLOSE</span><span class="s2">);  </span><span class="s3">// set default close operation</span>
+
+        <span class="s3">// set the background image path</span>
+        <span class="s1">String imagePath </span><span class="s2">= </span><span class="s4">&quot;/C:/Users/My PC/IdeaProjects/BakeryTPS/src/bgIMG.jpg/&quot;</span><span class="s2">;</span>
+        <span class="s1">BackgroundPanel backgroundPanel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BackgroundPanel</span><span class="s2">(</span><span class="s1">imagePath</span><span class="s2">);  </span><span class="s3">// create a background panel</span>
+        <span class="s1">setContentPane</span><span class="s2">(</span><span class="s1">backgroundPanel</span><span class="s2">);  </span><span class="s3">// set the background panel as the content pane</span>
+        <span class="s1">backgroundPanel</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">GridBagLayout</span><span class="s2">());  </span><span class="s3">// use grid bag layout for the background panel</span>
+
+        <span class="s1">GridBagConstraints gbc </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GridBagConstraints</span><span class="s2">();  </span><span class="s3">// create grid bag constraints</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">insets </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Insets</span><span class="s2">(</span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">);  </span><span class="s3">// set insets for padding</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;  </span><span class="s3">// start at column 0</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;  </span><span class="s3">// start at row 0</span>
+
+        <span class="s3">// initialize product names and prices arrays</span>
+        <span class="s1">String</span><span class="s2">[] </span><span class="s1">productNames</span><span class="s2">;</span>
+        <span class="s0">double</span><span class="s2">[] </span><span class="s1">productPrices</span><span class="s2">;</span>
+
+        <span class="s3">// switch case to determine the product type and set corresponding product names and prices</span>
+        <span class="s0">switch </span><span class="s2">(</span><span class="s1">productType</span><span class="s2">) {</span>
+            <span class="s0">case </span><span class="s4">&quot;Sandwich&quot;</span><span class="s2">:</span>
+                <span class="s1">productNames </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">[]{</span><span class="s4">&quot;Tuna Sandwich&quot;</span><span class="s2">, </span><span class="s4">&quot;Chicken Sandwich&quot;</span><span class="s2">, </span><span class="s4">&quot;Cheese Sandwich&quot;</span><span class="s2">, </span><span class="s4">&quot;Egg Sandwich&quot;</span><span class="s2">, </span><span class="s4">&quot;Ham &amp; Cheese&quot;</span><span class="s2">, </span><span class="s4">&quot;Double Decker&quot;</span><span class="s2">, </span><span class="s4">&quot;Club House&quot;</span><span class="s2">, </span><span class="s4">&quot;Club Sandwich&quot;</span><span class="s2">, </span><span class="s4">&quot;BLT Sandwich&quot;</span><span class="s2">};</span>
+                <span class="s1">productPrices </span><span class="s2">= </span><span class="s0">new double</span><span class="s2">[]{</span><span class="s5">80</span><span class="s2">, </span><span class="s5">80</span><span class="s2">, </span><span class="s5">70</span><span class="s2">, </span><span class="s5">70</span><span class="s2">, </span><span class="s5">80</span><span class="s2">, </span><span class="s5">80</span><span class="s2">, </span><span class="s5">100</span><span class="s2">, </span><span class="s5">120</span><span class="s2">, </span><span class="s5">80</span><span class="s2">};</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">case </span><span class="s4">&quot;Dessert&quot;</span><span class="s2">:</span>
+                <span class="s1">productNames </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">[]{</span><span class="s4">&quot;Totoro CreamPuff&quot;</span><span class="s2">, </span><span class="s4">&quot;Kiki's Cupcake&quot;</span><span class="s2">, </span><span class="s4">&quot;Matcha Revelbar&quot;</span><span class="s2">, </span><span class="s4">&quot;Chocolate Revelbar&quot;</span><span class="s2">, </span><span class="s4">&quot;Strawberry Shortcake&quot;</span><span class="s2">, </span><span class="s4">&quot;Apple Pie&quot;</span><span class="s2">, </span><span class="s4">&quot;Cinnamon roll&quot;</span><span class="s2">, </span><span class="s4">&quot;Krinkles&quot;</span><span class="s2">, </span><span class="s4">&quot;Choco Chip Cookies&quot;</span><span class="s2">};</span>
+                <span class="s1">productPrices </span><span class="s2">= </span><span class="s0">new double</span><span class="s2">[]{</span><span class="s5">100</span><span class="s2">, </span><span class="s5">80</span><span class="s2">, </span><span class="s5">75</span><span class="s2">, </span><span class="s5">75</span><span class="s2">, </span><span class="s5">90</span><span class="s2">, </span><span class="s5">90</span><span class="s2">, </span><span class="s5">80</span><span class="s2">, </span><span class="s5">30</span><span class="s2">, </span><span class="s5">30</span><span class="s2">};</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">case </span><span class="s4">&quot;Drinks&quot;</span><span class="s2">:</span>
+                <span class="s1">productNames </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">[]{</span><span class="s4">&quot;Latte&quot;</span><span class="s2">, </span><span class="s4">&quot;Cappuccino&quot;</span><span class="s2">, </span><span class="s4">&quot;Caramel latte&quot;</span><span class="s2">, </span><span class="s4">&quot;Honey Matcha&quot;</span><span class="s2">, </span><span class="s4">&quot;Matcha&quot;</span><span class="s2">, </span><span class="s4">&quot;Strawberry Matcha&quot;</span><span class="s2">, </span><span class="s4">&quot;Matcha Yakult&quot;</span><span class="s2">, </span><span class="s4">&quot;Mixed Berry Yakult&quot;</span><span class="s2">, </span><span class="s4">&quot;Ube Latte&quot;</span><span class="s2">, </span><span class="s4">&quot;Honey Citron&quot;</span><span class="s2">, </span><span class="s4">&quot;Hazelnut Mocha&quot;</span><span class="s2">, </span><span class="s4">&quot;Matcha Espresso&quot;</span><span class="s2">};</span>
+                <span class="s1">productPrices </span><span class="s2">= </span><span class="s0">new double</span><span class="s2">[]{</span><span class="s5">80</span><span class="s2">, </span><span class="s5">80</span><span class="s2">, </span><span class="s5">90</span><span class="s2">, </span><span class="s5">95</span><span class="s2">, </span><span class="s5">120</span><span class="s2">, </span><span class="s5">150</span><span class="s2">, </span><span class="s5">130</span><span class="s2">, </span><span class="s5">120</span><span class="s2">, </span><span class="s5">120</span><span class="s2">, </span><span class="s5">100</span><span class="s2">, </span><span class="s5">130</span><span class="s2">, </span><span class="s5">130</span><span class="s2">};</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">default</span><span class="s2">:</span>
+                <span class="s1">productNames </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">[]{};</span>
+                <span class="s1">productPrices </span><span class="s2">= </span><span class="s0">new double</span><span class="s2">[]{};</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// loop through product names and prices to create buttons</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">productNames</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s1">String productName </span><span class="s2">= </span><span class="s1">productNames</span><span class="s2">[</span><span class="s1">i</span><span class="s2">];</span>
+            <span class="s0">double </span><span class="s1">productPrice </span><span class="s2">= </span><span class="s1">productPrices</span><span class="s2">[</span><span class="s1">i</span><span class="s2">];</span>
+
+            <span class="s3">// create a button for each product</span>
+            <span class="s1">JButton productButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s1">productName </span><span class="s2">+ </span><span class="s4">&quot; - ₱&quot; </span><span class="s2">+ </span><span class="s1">productPrice</span><span class="s2">);</span>
+            <span class="s1">productButton</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s5">200</span><span class="s2">, </span><span class="s5">50</span><span class="s2">));  </span><span class="s3">// set button size</span>
+            <span class="s1">productButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+                <span class="s1">@Override</span>
+                <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                    <span class="s3">// add product to cart and show confirmation message</span>
+                    <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">getCart</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">bakerySystem</span><span class="s2">.</span><span class="s0">new </span><span class="s1">Product</span><span class="s2">(</span><span class="s1">productName</span><span class="s2">, </span><span class="s1">productPrice</span><span class="s2">));</span>
+                    <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">, </span><span class="s1">productName </span><span class="s2">+ </span><span class="s4">&quot; added to cart.&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+            <span class="s1">backgroundPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">productButton</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);  </span><span class="s3">// add button to background panel with constraints</span>
+
+            <span class="s3">// update grid bag constraints for next button</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">== </span><span class="s5">2</span><span class="s2">) {  </span><span class="s3">// to control the number of columns</span>
+                <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+                <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy</span><span class="s2">++;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx</span><span class="s2">++;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// create a panel to hold the &quot;Back&quot;, &quot;View Cart&quot;, and &quot;Checkout&quot; buttons</span>
+        <span class="s1">JPanel buttonPanel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">(</span><span class="s0">new </span><span class="s1">GridBagLayout</span><span class="s2">());</span>
+        <span class="s1">GridBagConstraints buttonGbc </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GridBagConstraints</span><span class="s2">();</span>
+        <span class="s1">buttonGbc</span><span class="s2">.</span><span class="s1">insets </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Insets</span><span class="s2">(</span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">);  </span><span class="s3">// set insets for padding</span>
+
+        <span class="s3">// create back button</span>
+        <span class="s1">JButton backButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s4">&quot;Back&quot;</span><span class="s2">);</span>
+        <span class="s1">backButton</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s5">200</span><span class="s2">, </span><span class="s5">50</span><span class="s2">));</span>
+        <span class="s1">backButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">createProductTypeFrame</span><span class="s2">();  </span><span class="s3">// go back to product type frame</span>
+                <span class="s1">dispose</span><span class="s2">();  </span><span class="s3">// close current frame</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">buttonGbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">backButton</span><span class="s2">, </span><span class="s1">buttonGbc</span><span class="s2">);</span>
+
+        <span class="s3">// create view cart button</span>
+        <span class="s1">JButton viewCartButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s4">&quot;View Cart&quot;</span><span class="s2">);</span>
+        <span class="s1">viewCartButton</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s5">200</span><span class="s2">, </span><span class="s5">50</span><span class="s2">));</span>
+        <span class="s1">viewCartButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">createCartFrame</span><span class="s2">(</span><span class="s1">ProductSelectionFrame</span><span class="s2">.</span><span class="s0">this</span><span class="s2">);  </span><span class="s3">// open cart frame</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">buttonGbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s5">1</span><span class="s2">;</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">viewCartButton</span><span class="s2">, </span><span class="s1">buttonGbc</span><span class="s2">);</span>
+
+        <span class="s3">// create checkout button</span>
+        <span class="s1">JButton checkoutButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s4">&quot;Checkout&quot;</span><span class="s2">);</span>
+        <span class="s1">checkoutButton</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s5">200</span><span class="s2">, </span><span class="s5">50</span><span class="s2">));</span>
+        <span class="s1">checkoutButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">createCheckoutFrame</span><span class="s2">();  </span><span class="s3">// open checkout frame</span>
+                <span class="s1">dispose</span><span class="s2">();  </span><span class="s3">// close current frame</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">buttonGbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s5">2</span><span class="s2">;</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">checkoutButton</span><span class="s2">, </span><span class="s1">buttonGbc</span><span class="s2">);</span>
+
+        <span class="s3">// add button panel to background panel with updated constraints</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy</span><span class="s2">++;</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridwidth </span><span class="s2">= </span><span class="s5">3</span><span class="s2">;  </span><span class="s3">// span across all columns</span>
+        <span class="s1">backgroundPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">buttonPanel</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);</span>
+
+        <span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);  </span><span class="s3">// make the frame visible</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

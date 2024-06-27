@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>BackgroundPanel.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+BackgroundPanel.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">File</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">imageio</span><span class="s2">.</span><span class="s1">ImageIO</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">BackgroundPanel </span><span class="s0">extends </span><span class="s1">JPanel </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">Image backgroundImage</span><span class="s2">;</span>
+
+    <span class="s3">// constructor that takes a file path to load the background image</span>
+    <span class="s0">public </span><span class="s1">BackgroundPanel</span><span class="s2">(</span><span class="s1">String filePath</span><span class="s2">) {</span>
+        <span class="s1">loadImage</span><span class="s2">(</span><span class="s1">filePath</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// loads the image from the file path</span>
+    <span class="s0">private void </span><span class="s1">loadImage</span><span class="s2">(</span><span class="s1">String filePath</span><span class="s2">) {</span>
+        <span class="s1">File file </span><span class="s2">= </span><span class="s0">new </span><span class="s1">File</span><span class="s2">(</span><span class="s1">filePath</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">file</span><span class="s2">.</span><span class="s1">exists</span><span class="s2">()) { </span><span class="s3">// checks if the file exists</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;File does not exist: &quot; </span><span class="s2">+ </span><span class="s1">filePath</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">file</span><span class="s2">.</span><span class="s1">canRead</span><span class="s2">()) { </span><span class="s3">// checks if the file can be read</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;File cannot be read: &quot; </span><span class="s2">+ </span><span class="s1">filePath</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">backgroundImage </span><span class="s2">= </span><span class="s1">ImageIO</span><span class="s2">.</span><span class="s1">read</span><span class="s2">(</span><span class="s1">file</span><span class="s2">); </span><span class="s3">// tries to read the image file</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">backgroundImage </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) { </span><span class="s3">// checks if the image was successfully loaded</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Failed to load image: &quot; </span><span class="s2">+ </span><span class="s1">filePath</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) { </span><span class="s3">// handle any IO exceptions</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">paintComponent</span><span class="s2">(</span><span class="s1">Graphics g</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">paintComponent</span><span class="s2">(</span><span class="s1">g</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">backgroundImage </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s3">// draws the background image to fill the panel</span>
+            <span class="s1">g</span><span class="s2">.</span><span class="s1">drawImage</span><span class="s2">(</span><span class="s1">backgroundImage</span><span class="s2">, </span><span class="s5">0</span><span class="s2">, </span><span class="s5">0</span><span class="s2">, </span><span class="s1">getWidth</span><span class="s2">(), </span><span class="s1">getHeight</span><span class="s2">(), </span><span class="s0">this</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Background image is null.&quot;</span><span class="s2">); </span><span class="s3">// prints an error if image is not loaded</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">Dimension getPreferredSize</span><span class="s2">() {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">backgroundImage </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s3">// returns the size of the image if loaded</span>
+            <span class="s0">return new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s1">backgroundImage</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">(</span><span class="s0">this</span><span class="s2">), </span><span class="s1">backgroundImage</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">(</span><span class="s0">this</span><span class="s2">));</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s3">// returns a default size if the image is not loaded</span>
+            <span class="s0">return new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s5">800</span><span class="s2">, </span><span class="s5">600</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

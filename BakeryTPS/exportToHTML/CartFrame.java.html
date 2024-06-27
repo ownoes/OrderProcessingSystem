@@ -1,0 +1,144 @@
+<html>
+<head>
+<title>CartFrame.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CartFrame.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionListener</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">CartFrame </span><span class="s0">extends </span><span class="s1">JFrame </span><span class="s2">{</span>
+    <span class="s3">// constructor for cart frame</span>
+    <span class="s0">public </span><span class="s1">CartFrame</span><span class="s2">(</span><span class="s1">BakerySystem bakerySystem</span><span class="s2">, </span><span class="s1">JFrame previousFrame</span><span class="s2">) {</span>
+        <span class="s1">setTitle</span><span class="s2">(</span><span class="s4">&quot;Cart&quot;</span><span class="s2">);</span>
+        <span class="s1">setExtendedState</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">MAXIMIZED_BOTH</span><span class="s2">);</span>
+        <span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">DISPOSE_ON_CLOSE</span><span class="s2">);</span>
+
+        <span class="s3">// set background image</span>
+        <span class="s1">String imagePath </span><span class="s2">= </span><span class="s4">&quot;/C:/Users/My PC/IdeaProjects/BakeryTPS/src/bg2IMG.jpg/&quot;</span><span class="s2">;</span>
+        <span class="s1">BackgroundPanel backgroundPanel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BackgroundPanel</span><span class="s2">(</span><span class="s1">imagePath</span><span class="s2">);</span>
+        <span class="s1">setContentPane</span><span class="s2">(</span><span class="s1">backgroundPanel</span><span class="s2">);</span>
+        <span class="s1">backgroundPanel</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">GridBagLayout</span><span class="s2">());</span>
+
+        <span class="s1">GridBagConstraints constraints </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GridBagConstraints</span><span class="s2">();</span>
+
+        <span class="s1">JTextArea cartDisplay </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextArea</span><span class="s2">();  </span><span class="s3">// create text area to display cart items</span>
+        <span class="s1">cartDisplay</span><span class="s2">.</span><span class="s1">setEditable</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);  </span><span class="s3">// set text area to be non-editable</span>
+
+        <span class="s1">StringBuilder cartContent </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StringBuilder</span><span class="s2">(</span><span class="s4">&quot;Cart:</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);  </span><span class="s3">// create string builder for cart content</span>
+        <span class="s0">double </span><span class="s1">total </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;  </span><span class="s3">// initialize total price</span>
+
+        <span class="s3">// loop through cart items and add them to the cart content</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">getCart</span><span class="s2">().</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s1">BakerySystem</span><span class="s2">.</span><span class="s1">Product product </span><span class="s2">= </span><span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">getCart</span><span class="s2">().</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+            <span class="s1">cartContent</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;. &quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">getName</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot; - ₱&quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">getPrice</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+            <span class="s1">total </span><span class="s2">+= </span><span class="s1">product</span><span class="s2">.</span><span class="s1">getPrice</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s1">cartContent</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">Total: ₱&quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">total</span><span class="s2">);  </span><span class="s3">// add total price to cart content</span>
+
+        <span class="s1">cartDisplay</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">cartContent</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s1">constraints</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">constraints</span><span class="s2">.</span><span class="s1">gridy </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">constraints</span><span class="s2">.</span><span class="s1">gridwidth </span><span class="s2">= </span><span class="s5">2</span><span class="s2">;</span>
+        <span class="s1">constraints</span><span class="s2">.</span><span class="s1">insets </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Insets</span><span class="s2">(</span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">);</span>
+        <span class="s1">backgroundPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JScrollPane</span><span class="s2">(</span><span class="s1">cartDisplay</span><span class="s2">), </span><span class="s1">constraints</span><span class="s2">);</span>
+
+        <span class="s1">JPanel buttonPanel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">();  </span><span class="s3">// create panel for buttons</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">GridBagLayout</span><span class="s2">());  </span><span class="s3">// use grid bag layout for button panel</span>
+
+        <span class="s3">// create clear cart button</span>
+        <span class="s1">JButton clearCartButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s4">&quot;Clear Cart&quot;</span><span class="s2">);</span>
+        <span class="s1">clearCartButton</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s5">150</span><span class="s2">, </span><span class="s5">40</span><span class="s2">));</span>
+        <span class="s1">clearCartButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">getCart</span><span class="s2">().</span><span class="s1">clear</span><span class="s2">();  </span><span class="s3">// clear the cart</span>
+                <span class="s1">cartDisplay</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s4">&quot;Cart:</span><span class="s0">\n\n</span><span class="s4">Total: ₱0.00&quot;</span><span class="s2">);  </span><span class="s3">// update cart display</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s3">// create remove last item button</span>
+        <span class="s1">JButton removeItemButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s4">&quot;Remove Last Item&quot;</span><span class="s2">);</span>
+        <span class="s1">removeItemButton</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s5">150</span><span class="s2">, </span><span class="s5">40</span><span class="s2">));</span>
+        <span class="s1">removeItemButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(!</span><span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">getCart</span><span class="s2">().</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+                    <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">getCart</span><span class="s2">().</span><span class="s1">remove</span><span class="s2">(</span><span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">getCart</span><span class="s2">().</span><span class="s1">size</span><span class="s2">() - </span><span class="s5">1</span><span class="s2">);  </span><span class="s3">// remove last item from cart</span>
+                    <span class="s0">double </span><span class="s1">newTotal </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+                    <span class="s1">StringBuilder newCartContent </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StringBuilder</span><span class="s2">(</span><span class="s4">&quot;Cart:</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);  </span><span class="s3">// create new cart content</span>
+                    <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">getCart</span><span class="s2">().</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+                        <span class="s1">BakerySystem</span><span class="s2">.</span><span class="s1">Product product </span><span class="s2">= </span><span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">getCart</span><span class="s2">().</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+                        <span class="s1">newCartContent</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;. &quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">getName</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot; - ₱&quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">getPrice</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+                        <span class="s1">newTotal </span><span class="s2">+= </span><span class="s1">product</span><span class="s2">.</span><span class="s1">getPrice</span><span class="s2">();</span>
+                    <span class="s2">}</span>
+                    <span class="s1">newCartContent</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">Total: ₱&quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">newTotal</span><span class="s2">);  </span><span class="s3">// add new total price</span>
+                    <span class="s1">cartDisplay</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">newCartContent</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());  </span><span class="s3">// update cart display</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s3">// create back button</span>
+        <span class="s1">JButton backButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s4">&quot;Back&quot;</span><span class="s2">);</span>
+        <span class="s1">backButton</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s5">150</span><span class="s2">, </span><span class="s5">40</span><span class="s2">));</span>
+        <span class="s1">backButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">previousFrame</span><span class="s2">.</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);  </span><span class="s3">// make previous frame visible</span>
+                <span class="s1">dispose</span><span class="s2">();  </span><span class="s3">// close current frame</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s3">// create checkout button</span>
+        <span class="s1">JButton checkoutButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s4">&quot;Checkout&quot;</span><span class="s2">);</span>
+        <span class="s1">checkoutButton</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s5">150</span><span class="s2">, </span><span class="s5">40</span><span class="s2">));</span>
+        <span class="s1">checkoutButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">createCheckoutFrame</span><span class="s2">();  </span><span class="s3">// open checkout frame</span>
+                <span class="s1">dispose</span><span class="s2">();  </span><span class="s3">// close current frame</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">GridBagConstraints gbc </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GridBagConstraints</span><span class="s2">();  </span><span class="s3">// create grid bag constraints for buttons</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">insets </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Insets</span><span class="s2">(</span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">);</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">clearCartButton</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);  </span><span class="s3">// add clear cart button to button panel with constraints</span>
+
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx</span><span class="s2">++;</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">removeItemButton</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);  </span><span class="s3">// add remove last item button to button panel with constraints</span>
+
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx</span><span class="s2">++;  </span><span class="s3">// move to next column</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">backButton</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);  </span><span class="s3">// add back button to button panel with constraints</span>
+
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx</span><span class="s2">++;  </span><span class="s3">// move to next column</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">checkoutButton</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);  </span><span class="s3">// add checkout button to button panel with constraints</span>
+
+        <span class="s1">constraints</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">constraints</span><span class="s2">.</span><span class="s1">gridy </span><span class="s2">= </span><span class="s5">1</span><span class="s2">;</span>
+        <span class="s1">constraints</span><span class="s2">.</span><span class="s1">gridwidth </span><span class="s2">= </span><span class="s5">2</span><span class="s2">;</span>
+        <span class="s1">backgroundPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">buttonPanel</span><span class="s2">, </span><span class="s1">constraints</span><span class="s2">);</span>
+
+        <span class="s1">setLocationRelativeTo</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

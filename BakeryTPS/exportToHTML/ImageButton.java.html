@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>ImageButton.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ImageButton.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">BufferedImage</span><span class="s2">;</span>
+
+<span class="s3">// Custom JButton class with an image background</span>
+<span class="s0">public class </span><span class="s1">ImageButton </span><span class="s0">extends </span><span class="s1">JButton </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">BufferedImage image</span><span class="s2">;  </span><span class="s3">// BufferedImage to hold the icon image</span>
+
+    <span class="s3">// Constructor to initialize the button with text and icon</span>
+    <span class="s0">public </span><span class="s1">ImageButton</span><span class="s2">(</span><span class="s1">String text</span><span class="s2">, </span><span class="s1">ImageIcon icon</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">(</span><span class="s1">text</span><span class="s2">, </span><span class="s1">icon</span><span class="s2">);</span>
+        <span class="s3">// Create a BufferedImage from the icon</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">image </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BufferedImage</span><span class="s2">(</span><span class="s1">icon</span><span class="s2">.</span><span class="s1">getIconWidth</span><span class="s2">(), </span><span class="s1">icon</span><span class="s2">.</span><span class="s1">getIconHeight</span><span class="s2">(), </span><span class="s1">BufferedImage</span><span class="s2">.</span><span class="s1">TYPE_INT_ARGB</span><span class="s2">);</span>
+        <span class="s1">Graphics g </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">getGraphics</span><span class="s2">();</span>
+        <span class="s1">icon</span><span class="s2">.</span><span class="s1">paintIcon</span><span class="s2">(</span><span class="s0">null</span><span class="s2">, </span><span class="s1">g</span><span class="s2">, </span><span class="s4">0</span><span class="s2">, </span><span class="s4">0</span><span class="s2">);</span>
+        <span class="s1">g</span><span class="s2">.</span><span class="s1">dispose</span><span class="s2">();</span>
+
+        <span class="s3">// Set button properties to make it transparent</span>
+        <span class="s1">setOpaque</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">setContentAreaFilled</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">setBorderPainted</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">setFocusPainted</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+
+        <span class="s3">// Center the text within the button</span>
+        <span class="s1">setHorizontalTextPosition</span><span class="s2">(</span><span class="s1">SwingConstants</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+        <span class="s1">setVerticalTextPosition</span><span class="s2">(</span><span class="s1">SwingConstants</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Override the paintComponent method to draw the image</span>
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">paintComponent</span><span class="s2">(</span><span class="s1">Graphics g</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">image </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">g</span><span class="s2">.</span><span class="s1">drawImage</span><span class="s2">(</span><span class="s1">image</span><span class="s2">, </span><span class="s4">0</span><span class="s2">, </span><span class="s4">0</span><span class="s2">, </span><span class="s0">this</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">(), </span><span class="s0">this</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">(), </span><span class="s0">this</span><span class="s2">); </span><span class="s3">// Draw the image scaled to the button size</span>
+        <span class="s2">}</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">paintComponent</span><span class="s2">(</span><span class="s1">g</span><span class="s2">); </span><span class="s3">// Call the superclass's paintComponent method</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Override the getPreferredSize method to return the size of the image</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">Dimension getPreferredSize</span><span class="s2">() {</span>
+        <span class="s0">return new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">(), </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Override the contains method to check if a point is within the non-transparent part of the image</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public boolean </span><span class="s1">contains</span><span class="s2">(</span><span class="s0">int </span><span class="s1">x</span><span class="s2">, </span><span class="s0">int </span><span class="s1">y</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">x </span><span class="s2">&lt; </span><span class="s4">0 </span><span class="s2">|| </span><span class="s1">x </span><span class="s2">&gt;= </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">() || </span><span class="s1">y </span><span class="s2">&lt; </span><span class="s4">0 </span><span class="s2">|| </span><span class="s1">y </span><span class="s2">&gt;= </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">()) {</span>
+            <span class="s0">return false</span><span class="s2">; </span><span class="s3">// Check if coordinates are outside image bounds</span>
+        <span class="s2">}</span>
+        <span class="s0">int </span><span class="s1">alpha </span><span class="s2">= (</span><span class="s1">image</span><span class="s2">.</span><span class="s1">getRGB</span><span class="s2">(</span><span class="s1">x</span><span class="s2">, </span><span class="s1">y</span><span class="s2">) &gt;&gt; </span><span class="s4">24</span><span class="s2">) &amp; </span><span class="s4">0xff</span><span class="s2">;</span>
+        <span class="s0">return </span><span class="s1">alpha </span><span class="s2">!= </span><span class="s4">0</span><span class="s2">; </span><span class="s3">// Check if the pixel is not transparent</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>MainFrame.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainFrame.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionListener</span><span class="s2">;</span>
+<span class="s3">// creates the order type screen</span>
+<span class="s0">public class </span><span class="s1">MainFrame </span><span class="s0">extends </span><span class="s1">JFrame </span><span class="s2">{</span>
+    <span class="s0">public </span><span class="s1">MainFrame</span><span class="s2">(</span><span class="s1">BakerySystem bakerySystem</span><span class="s2">) {</span>
+        <span class="s1">setTitle</span><span class="s2">(</span><span class="s4">&quot;New Order&quot;</span><span class="s2">);</span>
+        <span class="s1">setExtendedState</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">MAXIMIZED_BOTH</span><span class="s2">);</span>
+        <span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">EXIT_ON_CLOSE</span><span class="s2">);</span>
+
+        <span class="s3">// shows the background</span>
+
+        <span class="s1">String imagePath </span><span class="s2">= </span><span class="s4">&quot;/C:/Users/My PC/IdeaProjects/BakeryTPS/src/bgIMG.jpg/&quot;</span><span class="s2">;</span>
+        <span class="s1">BackgroundPanel backgroundPanel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BackgroundPanel</span><span class="s2">(</span><span class="s1">imagePath</span><span class="s2">);</span>
+        <span class="s1">setContentPane</span><span class="s2">(</span><span class="s1">backgroundPanel</span><span class="s2">);</span>
+        <span class="s1">backgroundPanel</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">GridBagLayout</span><span class="s2">());</span>
+
+        <span class="s1">GridBagConstraints gbc </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GridBagConstraints</span><span class="s2">();</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">insets </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Insets</span><span class="s2">(</span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">10</span><span class="s2">);</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+
+        <span class="s3">// dine in button</span>
+        <span class="s1">ImageIcon dineInIcon </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ImageIcon</span><span class="s2">(</span><span class="s4">&quot;/C:/Users/My PC/IdeaProjects/BakeryTPS/src/Button.png/&quot;</span><span class="s2">);</span>
+        <span class="s1">ImageButton dineInButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ImageButton</span><span class="s2">(</span><span class="s4">&quot;Dine In&quot;</span><span class="s2">, </span><span class="s1">dineInIcon</span><span class="s2">);</span>
+        <span class="s1">dineInButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Dine In button clicked&quot;</span><span class="s2">);</span>
+                <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">setOrderType</span><span class="s2">(</span><span class="s4">&quot;Dine In&quot;</span><span class="s2">);</span>
+                <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">createProductTypeFrame</span><span class="s2">();</span>
+                <span class="s1">dispose</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">backgroundPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">dineInButton</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);</span>
+
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy</span><span class="s2">++;</span>
+
+        <span class="s3">// take out button</span>
+        <span class="s1">ImageIcon takeOutIcon </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ImageIcon</span><span class="s2">(</span><span class="s4">&quot;/C:/Users/My PC/IdeaProjects/BakeryTPS/src/Button.png/&quot;</span><span class="s2">);</span>
+        <span class="s1">ImageButton takeOutButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ImageButton</span><span class="s2">(</span><span class="s4">&quot;Take Out&quot;</span><span class="s2">, </span><span class="s1">takeOutIcon</span><span class="s2">);</span>
+        <span class="s1">takeOutButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Take Out button clicked&quot;</span><span class="s2">);</span>
+                <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">setOrderType</span><span class="s2">(</span><span class="s4">&quot;Take Out&quot;</span><span class="s2">);</span>
+                <span class="s1">bakerySystem</span><span class="s2">.</span><span class="s1">createProductTypeFrame</span><span class="s2">();</span>
+                <span class="s1">dispose</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">backgroundPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">takeOutButton</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);</span>
+
+        <span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s3">// assuming BakerySystem is properly defined</span>
+        <span class="s1">BakerySystem bakerySystem </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BakerySystem</span><span class="s2">();</span>
+        <span class="s0">new </span><span class="s1">MainFrame</span><span class="s2">(</span><span class="s1">bakerySystem</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

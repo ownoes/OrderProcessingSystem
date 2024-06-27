@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>BakerySystem.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+BakerySystem.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">BakerySystem </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">JFrame mainFrame</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">&gt; </span><span class="s1">cart</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String orderType</span><span class="s2">;</span>
+
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s0">new </span><span class="s1">BakerySystem</span><span class="s2">().</span><span class="s1">createSplashScreen</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// initializes the cart</span>
+    <span class="s0">public </span><span class="s1">BakerySystem</span><span class="s2">() {</span>
+        <span class="s1">cart </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// creates and display the splash screen</span>
+    <span class="s0">public void </span><span class="s1">createSplashScreen</span><span class="s2">() {</span>
+        <span class="s0">new </span><span class="s1">SplashScreen</span><span class="s2">(</span><span class="s0">this</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// creates and display the main frame</span>
+    <span class="s0">public void </span><span class="s1">createMainFrame</span><span class="s2">() {</span>
+        <span class="s1">mainFrame </span><span class="s2">= </span><span class="s0">new </span><span class="s1">MainFrame</span><span class="s2">(</span><span class="s0">this</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// creates and display the product type selection frame</span>
+    <span class="s0">public void </span><span class="s1">createProductTypeFrame</span><span class="s2">() {</span>
+        <span class="s0">new </span><span class="s1">ProductTypeFrame</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">orderType</span><span class="s2">);</span>
+        <span class="s1">mainFrame</span><span class="s2">.</span><span class="s1">dispose</span><span class="s2">();  </span><span class="s3">// Close the main frame</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// creates and display the product selection frame for a specific product type</span>
+    <span class="s0">public void </span><span class="s1">createProductSelectionFrame</span><span class="s2">(</span><span class="s1">String productType</span><span class="s2">) {</span>
+        <span class="s0">new </span><span class="s1">ProductSelectionFrame</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">productType</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// creates and display the cart frame</span>
+    <span class="s0">public void </span><span class="s1">createCartFrame</span><span class="s2">(</span><span class="s1">JFrame previousFrame</span><span class="s2">) {</span>
+        <span class="s0">new </span><span class="s1">CartFrame</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">previousFrame</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// creates and display the checkout frame</span>
+    <span class="s0">public void </span><span class="s1">createCheckoutFrame</span><span class="s2">() {</span>
+        <span class="s0">new </span><span class="s1">CheckoutFrame</span><span class="s2">(</span><span class="s0">this</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// getter method to retrieve the cart</span>
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">&gt; </span><span class="s1">getCart</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">cart</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// setter method to set the order type</span>
+    <span class="s0">public void </span><span class="s1">setOrderType</span><span class="s2">(</span><span class="s1">String orderType</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">orderType </span><span class="s2">= </span><span class="s1">orderType</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// getter method to retrieve the order type</span>
+    <span class="s0">public </span><span class="s1">String getOrderType</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">orderType</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// inner class to represent each product</span>
+    <span class="s0">public class </span><span class="s1">Product </span><span class="s2">{</span>
+        <span class="s0">private </span><span class="s1">String name</span><span class="s2">;  </span><span class="s3">// Name of the product</span>
+        <span class="s0">private double </span><span class="s1">price</span><span class="s2">;  </span><span class="s3">// Price of the product</span>
+
+        <span class="s3">// initializes the product with name and price</span>
+        <span class="s0">public </span><span class="s1">Product</span><span class="s2">(</span><span class="s1">String name</span><span class="s2">, </span><span class="s0">double </span><span class="s1">price</span><span class="s2">) {</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">name </span><span class="s2">= </span><span class="s1">name</span><span class="s2">;</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">price </span><span class="s2">= </span><span class="s1">price</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// getter method to retrieve the product name</span>
+        <span class="s0">public </span><span class="s1">String getName</span><span class="s2">() {</span>
+            <span class="s0">return </span><span class="s1">name</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// getter method to retrieve the product price</span>
+        <span class="s0">public double </span><span class="s1">getPrice</span><span class="s2">() {</span>
+            <span class="s0">return </span><span class="s1">price</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
